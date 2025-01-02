@@ -1,0 +1,673 @@
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
+    <title>İl Bazlı İstatistikler</title>
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Maymun Çiçeği Virüsü Karar Destek Sistemi</h2>
+            <nav>
+                <ul>
+                    <li><a href="./index.html">Anasayfa</a></li>
+                    <li><a href="./bolgesel.html">Bölgesel İstatistikler</a></li>
+                    <li><a href="./ilgenel.html">Mekansal İstatistikler</a></li>
+                    <li class="active"><a href="./iltrend.html">Trend İstatistikleri</a></li>
+                    <li><a href="./tahmin.html">Tahmin ve Öneriler</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <div class="header">
+
+                <h1>Değişim ve Trend İstatistikleri</h1>
+
+                <div class="date">Tarih: 30.12.2024 - 19:26:23</div>
+
+            </div>
+            <div class="iltfilters" id="secondarySelectors">
+                <div>
+                    <label for="ilSelectBottom">İl Seçimi1:</label>
+                    <select id="ilSelectBottom">
+                        <option value="Adana">Adana</option>
+                        <option value="Adıyaman">Adıyaman</option>
+                        <option value="Afyonkarahisar">Afyonkarahisar</option>
+                        <option value="Ağrı">Ağrı</option>
+                        <option value="Aksaray">Aksaray</option>
+                        <option value="Amasya">Amasya</option>
+                        <option value="Ankara">Ankara</option>
+                        <option value="Antalya">Antalya</option>
+                        <option value="Ardahan">Ardahan</option>
+                        <option value="Artvin">Artvin</option>
+                        <option value="Aydın">Aydın</option>
+                        <option value="Balıkesir">Balıkesir</option>
+                        <option value="Bartın">Bartın</option>
+                        <option value="Batman">Batman</option>
+                        <option value="Bayburt">Bayburt</option>
+                        <option value="Bilecik">Bilecik</option>
+                        <option value="Bingöl">Bingöl</option>
+                        <option value="Bitlis">Bitlis</option>
+                        <option value="Bolu">Bolu</option>
+                        <option value="Burdur">Burdur</option>
+                        <option value="Bursa">Bursa</option>
+                        <option value="Çanakkale">Çanakkale</option>
+                        <option value="Çankırı">Çankırı</option>
+                        <option value="Çorum">Çorum</option>
+                        <option value="Denizli">Denizli</option>
+                        <option value="Diyarbakır">Diyarbakır</option>
+                        <option value="Düzce">Düzce</option>
+                        <option value="Edirne">Edirne</option>
+                        <option value="Elazığ">Elazığ</option>
+                        <option value="Erzincan">Erzincan</option>
+                        <option value="Erzurum">Erzurum</option>
+                        <option value="Eskişehir">Eskişehir</option>
+                        <option value="Gaziantep">Gaziantep</option>
+                        <option value="Giresun">Giresun</option>
+                        <option value="Gümüşhane">Gümüşhane</option>
+                        <option value="Hakkari">Hakkari</option>
+                        <option value="Hatay">Hatay</option>
+                        <option value="Iğdır">Iğdır</option>
+                        <option value="Isparta">Isparta</option>
+                        <option value="İstanbul">İstanbul</option>
+                        <option value="İzmir">İzmir</option>
+                        <option value="Kahramanmaraş">Kahramanmaraş</option>
+                        <option value="Karabük">Karabük</option>
+                        <option value="Karaman">Karaman</option>
+                        <option value="Kars">Kars</option>
+                        <option value="Kastamonu">Kastamonu</option>
+                        <option value="Kayseri">Kayseri</option>
+                        <option value="Kilis">Kilis</option>
+                        <option value="Kırıkkale">Kırıkkale</option>
+                        <option value="Kırklareli">Kırklareli</option>
+                        <option value="Kırşehir">Kırşehir</option>
+                        <option value="Kocaeli">Kocaeli</option>
+                        <option value="Konya">Konya</option>
+                        <option value="Kütahya">Kütahya</option>
+                        <option value="Malatya">Malatya</option>
+                        <option value="Manisa">Manisa</option>
+                        <option value="Mardin">Mardin</option>
+                        <option value="Mersin">Mersin</option>
+                        <option value="Muğla">Muğla</option>
+                        <option value="Muş">Muş</option>
+                        <option value="Nevşehir">Nevşehir</option>
+                        <option value="Niğde">Niğde</option>
+                        <option value="Ordu">Ordu</option>
+                        <option value="Osmaniye">Osmaniye</option>
+                        <option value="Rize">Rize</option>
+                        <option value="Sakarya">Sakarya</option>
+                        <option value="Samsun">Samsun</option>
+                        <option value="Şanlıurfa">Şanlıurfa</option>
+                        <option value="Siirt">Siirt</option>
+                        <option value="Sinop">Sinop</option>
+                        <option value="Sivas">Sivas</option>
+                        <option value="Şırnak">Şırnak</option>
+                        <option value="Tekirdağ">Tekirdağ</option>
+                        <option value="Tokat">Tokat</option>
+                        <option value="Trabzon">Trabzon</option>
+                        <option value="Tunceli">Tunceli</option>
+                        <option value="Uşak">Uşak</option>
+                        <option value="Van">Van</option>
+                        <option value="Yalova">Yalova</option>
+                        <option value="Yozgat">Yozgat</option>
+                        <option value="Zonguldak">Zonguldak</option>
+                    </select>
+                    <label for="ilCompareBottom">İl 2 Seçimi:</label>
+                    <select id="ilCompareBottom">
+                        <option value="Adana">Adana</option>
+                        <option value="Adıyaman">Adıyaman</option>
+                        <option value="Afyonkarahisar">Afyonkarahisar</option>
+                        <option value="Ağrı">Ağrı</option>
+                        <option value="Aksaray">Aksaray</option>
+                        <option value="Amasya">Amasya</option>
+                        <option value="Ankara">Ankara</option>
+                        <option value="Antalya">Antalya</option>
+                        <option value="Ardahan">Ardahan</option>
+                        <option value="Artvin">Artvin</option>
+                        <option value="Aydın">Aydın</option>
+                        <option value="Balıkesir">Balıkesir</option>
+                        <option value="Bartın">Bartın</option>
+                        <option value="Batman">Batman</option>
+                        <option value="Bayburt">Bayburt</option>
+                        <option value="Bilecik">Bilecik</option>
+                        <option value="Bingöl">Bingöl</option>
+                        <option value="Bitlis">Bitlis</option>
+                        <option value="Bolu">Bolu</option>
+                        <option value="Burdur">Burdur</option>
+                        <option value="Bursa">Bursa</option>
+                        <option value="Çanakkale">Çanakkale</option>
+                        <option value="Çankırı">Çankırı</option>
+                        <option value="Çorum">Çorum</option>
+                        <option value="Denizli">Denizli</option>
+                        <option value="Diyarbakır">Diyarbakır</option>
+                        <option value="Düzce">Düzce</option>
+                        <option value="Edirne">Edirne</option>
+                        <option value="Elazığ">Elazığ</option>
+                        <option value="Erzincan">Erzincan</option>
+                        <option value="Erzurum">Erzurum</option>
+                        <option value="Eskişehir">Eskişehir</option>
+                        <option value="Gaziantep">Gaziantep</option>
+                        <option value="Giresun">Giresun</option>
+                        <option value="Gümüşhane">Gümüşhane</option>
+                        <option value="Hakkari">Hakkari</option>
+                        <option value="Hatay">Hatay</option>
+                        <option value="Iğdır">Iğdır</option>
+                        <option value="Isparta">Isparta</option>
+                        <option value="İstanbul">İstanbul</option>
+                        <option value="İzmir">İzmir</option>
+                        <option value="Kahramanmaraş">Kahramanmaraş</option>
+                        <option value="Karabük">Karabük</option>
+                        <option value="Karaman">Karaman</option>
+                        <option value="Kars">Kars</option>
+                        <option value="Kastamonu">Kastamonu</option>
+                        <option value="Kayseri">Kayseri</option>
+                        <option value="Kilis">Kilis</option>
+                        <option value="Kırıkkale">Kırıkkale</option>
+                        <option value="Kırklareli">Kırklareli</option>
+                        <option value="Kırşehir">Kırşehir</option>
+                        <option value="Kocaeli">Kocaeli</option>
+                        <option value="Konya">Konya</option>
+                        <option value="Kütahya">Kütahya</option>
+                        <option value="Malatya">Malatya</option>
+                        <option value="Manisa">Manisa</option>
+                        <option value="Mardin">Mardin</option>
+                        <option value="Mersin">Mersin</option>
+                        <option value="Muğla">Muğla</option>
+                        <option value="Muş">Muş</option>
+                        <option value="Nevşehir">Nevşehir</option>
+                        <option value="Niğde">Niğde</option>
+                        <option value="Ordu">Ordu</option>
+                        <option value="Osmaniye">Osmaniye</option>
+                        <option value="Rize">Rize</option>
+                        <option value="Sakarya">Sakarya</option>
+                        <option value="Samsun">Samsun</option>
+                        <option value="Şanlıurfa">Şanlıurfa</option>
+                        <option value="Siirt">Siirt</option>
+                        <option value="Sinop">Sinop</option>
+                        <option value="Sivas">Sivas</option>
+                        <option value="Şırnak">Şırnak</option>
+                        <option value="Tekirdağ">Tekirdağ</option>
+                        <option value="Tokat">Tokat</option>
+                        <option value="Trabzon">Trabzon</option>
+                        <option value="Tunceli">Tunceli</option>
+                        <option value="Uşak">Uşak</option>
+                        <option value="Van">Van</option>
+                        <option value="Yalova">Yalova</option>
+                        <option value="Yozgat">Yozgat</option>
+                        <option value="Zonguldak">Zonguldak</option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="chart">
+                <h2>İl Bazlı Verilerin Birleşik Grafiği</h2>
+                <canvas id="comparisonBottomChart"></canvas>
+            </div>
+
+            <div class="iltfilters">
+
+
+
+                <label for="monthSelect">Ay Seçimi:</label>
+                <select id="monthSelect">
+                    <option value="1">Ocak</option>
+                    <option value="2">Şubat</option>
+                    <option value="3">Mart</option>
+                    <option value="4">Nisan</option>
+                    <option value="5">Mayıs</option>
+                    <option value="6">Haziran</option>
+                    <option value="7">Temmuz</option>
+                    <option value="8">Ağustos</option>
+                    <option value="9">Eylül</option>
+                    <option value="10">Ekim</option>
+                    <option value="11">Kasım</option>
+                    <option value="12" selected="">Aralık</option>
+                </select>
+            </div>
+            <div class="mapp-container">
+
+                <div id="map"
+                    class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom"
+                    tabindex="0">
+                    <div class="leaflet-pane leaflet-map-pane" style="transform: translate3d(-205px, 0px, 0px);">
+                        <div class="leaflet-pane leaflet-tile-pane">
+                            <div class="leaflet-layer " style="z-index: 1; opacity: 1;">
+                                <div class="leaflet-tile-container leaflet-zoom-animated"
+                                    style="z-index: 18; transform: translate3d(0px, 0px, 0px) scale(1);"><img alt=""
+                                        src="https://b.tile.openstreetmap.org/6/37/24.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(389px, 137px, 0px); opacity: 1;"><img
+                                        alt="" src="https://c.tile.openstreetmap.org/6/38/24.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(645px, 137px, 0px); opacity: 1;"><img
+                                        alt="" src="https://a.tile.openstreetmap.org/6/37/23.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(389px, -119px, 0px); opacity: 1;"><img
+                                        alt="" src="https://b.tile.openstreetmap.org/6/38/23.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(645px, -119px, 0px); opacity: 1;"><img
+                                        alt="" src="https://c.tile.openstreetmap.org/6/37/25.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(389px, 393px, 0px); opacity: 1;"><img
+                                        alt="" src="https://a.tile.openstreetmap.org/6/38/25.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(645px, 393px, 0px); opacity: 1;"><img
+                                        alt="" src="https://a.tile.openstreetmap.org/6/36/24.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(133px, 137px, 0px); opacity: 1;"><img
+                                        alt="" src="https://a.tile.openstreetmap.org/6/39/24.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(901px, 137px, 0px); opacity: 1;"><img
+                                        alt="" src="https://c.tile.openstreetmap.org/6/36/23.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(133px, -119px, 0px); opacity: 1;"><img
+                                        alt="" src="https://c.tile.openstreetmap.org/6/39/23.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(901px, -119px, 0px); opacity: 1;"><img
+                                        alt="" src="https://b.tile.openstreetmap.org/6/36/25.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(133px, 393px, 0px); opacity: 1;"><img
+                                        alt="" src="https://b.tile.openstreetmap.org/6/39/25.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(901px, 393px, 0px); opacity: 1;"><img
+                                        alt="" src="https://c.tile.openstreetmap.org/6/35/24.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(-123px, 137px, 0px); opacity: 1;"><img
+                                        alt="" src="https://b.tile.openstreetmap.org/6/40/24.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(1157px, 137px, 0px); opacity: 1;"><img
+                                        alt="" src="https://b.tile.openstreetmap.org/6/35/23.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(-123px, -119px, 0px); opacity: 1;"><img
+                                        alt="" src="https://a.tile.openstreetmap.org/6/40/23.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(1157px, -119px, 0px); opacity: 1;"><img
+                                        alt="" src="https://a.tile.openstreetmap.org/6/35/25.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(-123px, 393px, 0px); opacity: 1;"><img
+                                        alt="" src="https://c.tile.openstreetmap.org/6/40/25.png"
+                                        class="leaflet-tile leaflet-tile-loaded"
+                                        style="width: 256px; height: 256px; transform: translate3d(1157px, 393px, 0px); opacity: 1;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="leaflet-pane leaflet-overlay-pane"></div>
+                        <div class="leaflet-pane leaflet-shadow-pane"></div>
+                        <div class="leaflet-pane leaflet-marker-pane"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(717px, 371px, 0px); z-index: 371;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(851px, 327px, 0px); z-index: 327;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(499px, 269px, 0px); z-index: 269;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(1068px, 212px, 0px); z-index: 212;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(740px, 157px, 0px); z-index: 157;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(604px, 200px, 0px); z-index: 200;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(506px, 377px, 0px); z-index: 377;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(1013px, 125px, 0px); z-index: 125;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(376px, 322px, 0px); z-index: 322;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(378px, 217px, 0px); z-index: 217;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(473px, 187px, 0px); z-index: 187;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(952px, 261px, 0px); z-index: 261;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(1025px, 289px, 0px); z-index: 289;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(548px, 152px, 0px); z-index: 152;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(487px, 329px, 0px); z-index: 329;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(432px, 185px, 0px); z-index: 185;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(311px, 187px, 0px); z-index: 187;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(639px, 160px, 0px); z-index: 160;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(700px, 163px, 0px); z-index: 163;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(433px, 325px, 0px); z-index: 325;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(940px, 318px, 0px); z-index: 318;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(318px, 95px, 0px); z-index: 95;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(894px, 274px, 0px); z-index: 274;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(906px, 211px, 0px); z-index: 211;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(987px, 201px, 0px); z-index: 201;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(498px, 209px, 0px); z-index: 209;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(810px, 367px, 0px); z-index: 367;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(856px, 141px, 0px); z-index: 141;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(906px, 168px, 0px); z-index: 168;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(1100px, 337px, 0px); z-index: 337;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(755px, 415px, 0px); z-index: 415;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(499px, 326px, 0px); z-index: 326;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(685px, 382px, 0px); z-index: 382;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(428px, 135px, 0px); z-index: 135;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(344px, 288px, 0px); z-index: 288;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(1070px, 159px, 0px); z-index: 159;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(646px, 113px, 0px); z-index: 113;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(724px, 271px, 0px); z-index: 271;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(348px, 91px, 0px); z-index: 91;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(664px, 246px, 0px); z-index: 246;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(472px, 150px, 0px); z-index: 150;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(588px, 320px, 0px); z-index: 320;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(474px, 230px, 0px); z-index: 230;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(853px, 293px, 0px); z-index: 293;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(358px, 277px, 0px); z-index: 277;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(790px, 337px, 0px); z-index: 337;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(963px, 352px, 0px); z-index: 352;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(400px, 358px, 0px); z-index: 358;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(997px, 270px, 0px); z-index: 270;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(689px, 277px, 0px); z-index: 277;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(687px, 315px, 0px); z-index: 315;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(833px, 137px, 0px); z-index: 137;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(953px, 134px, 0px); z-index: 134;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(493px, 149px, 0px); z-index: 149;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(763px, 118px, 0px); z-index: 118;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(1018px, 317px, 0px); z-index: 317;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(709px, 73px, 0px); z-index: 73;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(794px, 210px, 0px); z-index: 210;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(361px, 137px, 0px); z-index: 137;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(773px, 176px, 0px); z-index: 176;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(917px, 135px, 0px); z-index: 135;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(909px, 248px, 0px); z-index: 248;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(874px, 361px, 0px); z-index: 361;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(447px, 274px, 0px); z-index: 274;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(1084px, 284px, 0px); z-index: 284;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(693px, 206px, 0px); z-index: 206;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(556px, 109px, 0px); z-index: 109;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(658px, 291px, 0px); z-index: 291;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(939px, 180px, 0px); z-index: 180;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(621px, 360px, 0px); z-index: 360;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(634px, 205px, 0px); z-index: 205;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(981px, 319px, 0px); z-index: 319;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(1041px, 340px, 0px); z-index: 340;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(581px, 97px, 0px); z-index: 97;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(1052px, 129px, 0px); z-index: 129;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(1114px, 200px, 0px); z-index: 200;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(441px, 156px, 0px); z-index: 156;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(594px, 124px, 0px); z-index: 124;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(798px, 386px, 0px); z-index: 386;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(759px, 366px, 0px); z-index: 366;"><img
+                                src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png"
+                                class="leaflet-marker-icon leaflet-zoom-animated leaflet-interactive" alt="Marker"
+                                tabindex="0" role="button"
+                                style="margin-left: -6px; margin-top: -20px; width: 12px; height: 20px; transform: translate3d(527px, 145px, 0px); z-index: 145;">
+                        </div>
+                        <div class="leaflet-pane leaflet-tooltip-pane"></div>
+                        <div class="leaflet-pane leaflet-popup-pane"></div>
+                        <div class="leaflet-proxy leaflet-zoom-animated"
+                            style="transform: translate3d(9687.5px, 6207px, 0px) scale(32);"></div>
+                    </div>
+                    <div class="leaflet-control-container">
+                        <div class="leaflet-top leaflet-left">
+                            <div class="leaflet-control-zoom leaflet-bar leaflet-control"><a
+                                    class="leaflet-control-zoom-in" href="#" title="Zoom in" role="button"
+                                    aria-label="Zoom in" aria-disabled="false"><span aria-hidden="true">+</span></a><a
+                                    class="leaflet-control-zoom-out" href="#" title="Zoom out" role="button"
+                                    aria-label="Zoom out" aria-disabled="false"><span aria-hidden="true">−</span></a>
+                            </div>
+                        </div>
+                        <div class="leaflet-top leaflet-right"></div>
+                        <div class="leaflet-bottom leaflet-left"></div>
+                        <div class="leaflet-bottom leaflet-right">
+                            <div class="leaflet-control-attribution leaflet-control"><a href="https://leafletjs.com"
+                                    title="A JavaScript library for interactive maps"><svg aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"
+                                        class="leaflet-attribution-flag">
+                                        <path fill="#4C7BE1" d="M0 0h12v4H0z"></path>
+                                        <path fill="#FFD500" d="M0 4h12v3H0z"></path>
+                                        <path fill="#E0BC00" d="M0 7h12v1H0z"></path>
+                                    </svg> Leaflet</a> <span aria-hidden="true">|</span> Map data © OpenStreetMap
+                                contributors</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+
+    <script src="backend/functions/ortak.js"></script>
+    <script src="backend/functions/iltrend.js"></script>
+
+
+
+</body>
+
+</html>

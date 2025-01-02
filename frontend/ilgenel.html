@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:,">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <title>İl Genel Karşılaştırma</title>
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Maymun Çiçeği Virüsü Karar Destek Sistemi</h2>
+            <nav>
+                <ul>
+                    <li><a href="./index.html">Anasayfa</a></li>
+                    <li><a href="./bolgesel.html">Bölgesel İstatistikler</a></li>
+                    <li class="active"><a href="./ilgenel.html">Mekansal İstatistikler</a></li>
+                    <li><a href="./iltrend.html">Trend İstatistikleri</a></li>
+                    <li><a href="./tahmin.html">Tahmin ve Öneriler</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <div class="header">
+                <h1>Mekansal Veriler</h1>
+                <div class="date"></div>
+            </div>
+
+            <div class="cards">
+                <div class="card green">
+                    <h3>Toplam Vaka Sayısı</h3>
+                    <p>0</p>
+                </div>
+                <div class="card red">
+                    <h3>Toplam Ölüm Sayısı</h3>
+                    <p>0</p>
+                </div>
+                <div class="card blue">
+                    <h3>Toplam Karantina Kapasitesi</h3>
+                    <p>0</p>
+                </div>
+                <div class="card purple">
+                    <h3>Toplam İlaç Miktarı</h3>
+                    <p>0</p>
+                </div>
+            </div>
+
+            <div class="iltfilters">
+                <label for="dataSelect">Veri Seçimi:</label>
+                <select id="dataSelect">
+                    <option value="vaka_sayisi">Vaka Sayısı</option>
+                    <option value="olum_sayisi">Ölüm Sayısı</option>
+                    <option value="kapasite">Kapasite</option>
+                    <option value="ilac">İlaç</option>
+                </select>
+
+                <label for="monthSelect">Ay Seçimi:</label>
+                <select id="monthSelect">
+                    <option value="1">Ocak</option>
+                    <option value="2">Şubat</option>
+                    <option value="3">Mart</option>
+                    <option value="4">Nisan</option>
+                    <option value="5">Mayıs</option>
+                    <option value="6">Haziran</option>
+                    <option value="7">Temmuz</option>
+                    <option value="8">Ağustos</option>
+                    <option value="9">Eylül</option>
+                    <option value="10">Ekim</option>
+                    <option value="11">Kasım</option>
+                    <option value="12" selected>Aralık</option>
+                </select>
+            </div>
+            <div class="mapp-container">
+                <div id="mapp" style="height: 575px; width: 100%;"></div>
+            </div>
+
+        </main>
+    </div>
+    <script src="backend/functions/ortak.js"></script>
+    <script src="backend/functions/ilgenel.js"></script>
+</body>
+
+</html>

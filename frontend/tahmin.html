@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahmin ve Öneriler</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Maymun Çiçeği Virüsü Karar Destek Sistemi</h2>
+            <nav>
+                <ul>
+                    <li><a href="./index.html">Anasayfa</a></li>
+                    <li><a href="./bolgesel.html">Bölgesel İstatistikler</a></li>
+                    <li><a href="./ilgenel.html">Mekansal İstatistikler</a></li>
+                    <li><a href="./iltrend.html">Trend İstatistikleri</a></li>
+                    <li class="active"><a href="./tahmin.html">Tahmin ve Öneriler</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <div class="header">
+                <h1>Tahmin ve Karar Destek Mekanizması</h1>
+                <div class="date"></div>
+            </div>
+            <!-- Tahmin Grafikleri -->
+            <div class="mapp-container">
+                <h2>Tahmini Vaka Artışları</h2>
+                <!-- Bölge Seçim Alanı -->
+                <div class="iltfilters"> <label for="regionSelect">Bölge Seçin:</label>
+                    <select id="regionSelect">
+                        <!-- Dinamik olarak seçenekler buraya eklenecek -->
+                    </select>
+                </div>
+                <!-- Grafik Konteyneri -->
+                <canvas id="forecastChart" style="margin-top: 20px;"></canvas>
+            </div>
+
+            <!-- Öneriler Listesi -->
+
+            <div class="card">
+                <h3>Tahmine Dayalı Öneriler</h3>
+                <ul id="recommendationsList">
+                    <!-- Dinamik olarak öneriler burada gösterilecek -->
+                </ul>
+            </div>
+
+
+            <!-- Risk Haritası -->
+            <div class="mapp-container">
+                <h2>Bölgesel Risk Seviyeleri Haritası</h2>
+                <div id="riskMap" style="height: 500px; width: 100%;"></div>
+            </div>
+
+
+        </main>
+    </div>
+
+    <!-- Dinamik İşlemler İçin JS Dosyaları -->
+    <script src="backend/functions/tahmin.js"></script>
+    <script src="backend/functions/ortak.js"></script>
+
+</body>
+
+</html>
