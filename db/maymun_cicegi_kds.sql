@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Anamakine: 127.0.0.1:3306
--- Üretim Zamanı: 02 Oca 2025, 16:32:26
+-- Üretim Zamanı: 03 Oca 2025, 18:42:14
 -- Sunucu sürümü: 9.1.0
 -- PHP Sürümü: 8.3.14
 
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
 --
 
 INSERT INTO `admin` (`id`, `username`, `password`) VALUES
-(1, 'admin', '214266Ha');
+(1, 'admin', 'admin');
 
 -- --------------------------------------------------------
 
