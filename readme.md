@@ -51,8 +51,7 @@ Bu proje,  **Maymun Çiçeği Virüsü** simüle edilerek,Türkiye'deki vakalar�
 4. Bölgesel verileri `bolgesel.html` ile analiz edin.
 5. Tahmin Modülü: `tahmin.html` üzerinden **ARIMA** model sonuçlarını görüntüleyin.
 
-## Katkıda Bulunun
-Projeye katkıda bulunmak için bir `fork` yapabilir, değişikliklerinizi yapabilir ve bir `pull request` gönderebilirsiniz.
+## Amaç
 
 ---
 
